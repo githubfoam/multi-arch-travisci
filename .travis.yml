@@ -1,0 +1,38 @@
+language: c
+env:
+  global:
+    - arch_version=0.1
+services:
+  - docker
+arch:
+  - amd64
+  - arm64
+  - ppc64le
+  - s390x
+
+compiler:
+  - gcc
+  - clang
+
+jobs:
+  include:
+   - os: linux
+     arch: amd64
+     # env: LIB_PATH="/usr/bin/shared/x86_64/v1"
+   - os: linux
+     arch: arm64
+   - os: linux
+     arch: ppc64le
+   - os: linux
+     arch: s390x
+
+before_install: skip
+
+install: skip
+
+script:
+  - cd src
+  # - make all
+  # - docker build -t my/test -f Dockerfile.archxx .
+
+after_success: skip
