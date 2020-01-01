@@ -1,79 +1,86 @@
-language: c
-env:
-  global:
-    - arch_version="0.1"
+---
+dist: bionic
+language: generic
+sudo: required
+
 services:
   - docker
 
-arch:
-  - amd64
-  - arm64
-  - ppc64le
-  - s390x
+env:
+  global:
+    # - VERSION=${TRAVIS_TAG}
+    - VERSION=${TRAVIS_BRANCH}
+    - QEMU_VERSION=v4.0.0
 
-compiler:
-  - gcc
-  - clang
+# addons:
+#   apt:
+#     packages:
+#       - docker-ce
+#       - qemu-user-static
 
-jobs:
+matrix:
+  fast_finish: true
   include:
 
-   - os: linux
-     arch: amd64
-     # dist: bionic
-     language: python
-     python: 3.7
-     before_install:
-     - hostnamectl
-     - python --version
-     - docker --version
-     install: skip
-     before_script: skip
-     script: skip
-     env:
-      - LIB_PATH="/usr/bin/shared/x86_64/v1"
+     - os: linux
+       arch: amd64
+       # dist: bionic
+       language: python
+       python: 3.7
+       compiler:
+       - gcc
+       - clang
+       before_install:
+       - hostnamectl
+       - python --version
+       - docker --version
+       install: skip
+       before_script: skip
+       script: skip
+       env:
+        - LIB_PATH="/usr/bin/shared/x86_64/v1"
 
-   - os: linux
-     arch: arm64
-     language: python
-     python: 3.7
-     before_install:
-     - hostnamectl
-     - python --version
-     - docker --version
-     install: skip
-     before_script: skip
-     script: skip
-     env:
-      - LIB_PATH="/usr/bin/shared/x86_64/v1"
+     - os: linux
+       arch: arm64
+       language: python
+       python: 3.7
+       before_install:
+       - hostnamectl
+       - python --version
+       - docker --version
+       install: skip
+       before_script: skip
+       script: skip
+       env:
+        - LIB_PATH="/usr/bin/shared/x86_64/v1"
 
-   - os: linux
-     arch: ppc64le
-     language: python
-     python: 3.7
-     before_install:
-     - hostnamectl
-     - python --version
-     - docker --version
-     install: skip
-     before_script: skip
-     script: skip
-     env:
-      - LIB_PATH="/usr/bin/shared/x86_64/v1"
+     - os: linux
+       arch: ppc64le
+       language: python
+       python: 3.7
+       before_install:
+       - hostnamectl
+       - python --version
+       - docker --version
+       install: skip
+       before_script: skip
+       script: skip
+       env:
+        - LIB_PATH="/usr/bin/shared/x86_64/v1"
 
-   - os: linux
-     arch: s390x
-     language: python
-     python: 3.7
-     before_install:
-     - hostnamectl
-     - python --version
-     - docker --version
-     install: skip
-     before_script: skip
-     script: skip
-     env:
-     - LIB_PATH="/usr/bin/shared/x86_64/v1"
+     - os: linux
+       arch: s390x
+       language: python
+       python: 3.7
+       before_install:
+       - hostnamectl
+       - python --version
+       - docker --version
+       install: skip
+       before_script: skip
+       script: skip
+       env:
+       - LIB_PATH="/usr/bin/shared/x86_64/v1"
 
 before_install: skip
 install: skip
