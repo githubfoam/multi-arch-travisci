@@ -8,23 +8,21 @@ services:
 
 env:
   global:
-    # - VERSION=${TRAVIS_TAG}
     - VERSION=${TRAVIS_BRANCH}
     - QEMU_VERSION=v4.0.0
 
-# addons:
-#   apt:
-#     packages:
-#       - docker-ce
-#       - qemu-user-static
+addons:
+  apt:
+    packages:
+      - qemu-user-static
 
 matrix:
   fast_finish: true
   include:
 
-     - os: linux
+     - name: "Python 3.7 on linux  amd64"
+       os: linux
        arch: amd64
-       # dist: bionic
        language: python
        python: 3.7
        compiler:
@@ -40,7 +38,8 @@ matrix:
        env:
         - LIB_PATH="/usr/bin/shared/x86_64/v1"
 
-     - os: linux
+     - name: "Python 3.7 on linux arm64"
+       os: linux
        arch: arm64
        language: python
        python: 3.7
@@ -54,7 +53,8 @@ matrix:
        env:
         - LIB_PATH="/usr/bin/shared/x86_64/v1"
 
-     - os: linux
+     - name: "Python 3.7 on linux ppc64le"
+       os: linux
        arch: ppc64le
        language: python
        python: 3.7
@@ -68,7 +68,8 @@ matrix:
        env:
         - LIB_PATH="/usr/bin/shared/x86_64/v1"
 
-     - os: linux
+     - name: "Python 3.7 on linux s390x"
+       os: linux
        arch: s390x
        language: python
        python: 3.7
