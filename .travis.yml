@@ -30,9 +30,7 @@ before_install: skip
 
 install: skip
 
-script:
-  - cd src
-  # - make all
+script: skip
   # - docker build -t my/test -f Dockerfile.archxx .
 
 after_success: skip
