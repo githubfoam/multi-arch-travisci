@@ -1,36 +1,89 @@
-language: c
-env:
-  global:
-    - arch_version=0.1
+---
+dist: bionic
+language: generic
+sudo: required
+
 services:
   - docker
-arch:
-  - amd64
-  - arm64
-  - ppc64le
-  - s390x
 
-compiler:
-  - gcc
-  - clang
+env:
+  global:
+    - VERSION=${TRAVIS_BRANCH}
+    - QEMU_VERSION=v4.0.0
 
-jobs:
+addons:
+  apt:
+    packages:
+      - qemu-user-static
+
+matrix:
+  fast_finish: true
   include:
-   - os: linux
-     arch: amd64
-     # env: LIB_PATH="/usr/bin/shared/x86_64/v1"
-   - os: linux
-     arch: arm64
-   - os: linux
-     arch: ppc64le
-   - os: linux
-     arch: s390x
+
+     - name: "Python 3.7 on linux  amd64"
+       os: linux
+       arch: amd64
+       language: python
+       python: 3.7
+       compiler:
+       - gcc
+       - clang
+       before_install:
+       - hostnamectl
+       - python --version
+       - docker --version
+       install: skip
+       before_script: skip
+       script: skip
+       env:
+        - LIB_PATH="/usr/bin/shared/x86_64/v1"
+
+     - name: "Python 3.7 on linux arm64"
+       os: linux
+       arch: arm64
+       language: python
+       python: 3.7
+       before_install:
+       - hostnamectl
+       - python --version
+       - docker --version
+       install: skip
+       before_script: skip
+       script: skip
+       env:
+        - LIB_PATH="/usr/bin/shared/x86_64/v1"
+
+     - name: "Python 3.7 on linux ppc64le"
+       os: linux
+       arch: ppc64le
+       language: python
+       python: 3.7
+       before_install:
+       - hostnamectl
+       - python --version
+       - docker --version
+       install: skip
+       before_script: skip
+       script: skip
+       env:
+        - LIB_PATH="/usr/bin/shared/x86_64/v1"
+
+     - name: "Python 3.7 on linux s390x"
+       os: linux
+       arch: s390x
+       language: python
+       python: 3.7
+       before_install:
+       - hostnamectl
+       - python --version
+       - docker --version
+       install: skip
+       before_script: skip
+       script: skip
+       env:
+       - LIB_PATH="/usr/bin/shared/x86_64/v1"
 
 before_install: skip
-
 install: skip
-
 script: skip
-  # - docker build -t my/test -f Dockerfile.archxx .
-
 after_success: skip
