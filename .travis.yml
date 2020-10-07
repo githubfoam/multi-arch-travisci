@@ -1,21 +1,10 @@
 ---
-# dist: bionic
 dist: focal
 language: generic
 sudo: required
 
 services:
   - docker
-
-env:
-  global:
-    - VERSION=${TRAVIS_BRANCH}
-    - QEMU_VERSION=v4.0.0
-
-addons:
-  apt:
-    packages:
-      - qemu-user-static
 
 matrix:
   fast_finish: true
